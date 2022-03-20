@@ -2,6 +2,7 @@ const {
   isDigit,
   isSpace,
   isLetter,
+  isOperator,
   isAssigment,
   isComparison,
   isPunctuation,
@@ -21,7 +22,8 @@ module.exports.letterAutomaton = (code, position, reservedWords, ids) => {
       } else if (
         isComparison(code[i]) ||
         isPunctuation(code[i]) ||
-        isAssigment(code[i])
+        isAssigment(code[i]) ||
+        isOperator(code[i])
       ) {
         end = i - 1;
         i = code.length;
