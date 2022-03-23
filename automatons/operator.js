@@ -22,9 +22,30 @@ module.exports.operatorAutomaton = (code, position) => {
   //     token: `<operador,${code[position]}>`,
   //   };
   // } else {
-    return {
-      end: position,
-      token: `<operador,${code[position]}>`,
-    };
+
+    if(code[position]=="/"){
+
+      if(position+1 < code.length){
+
+        if(code[position+1]=="/"){
+
+          for (let i = position + 2; i < code.length; i++) {
+            if (code[i] === `\n`) {
+              return { end: i, token:null };
+            }
+          }
+  
+        }else{
+          return { end: position, token: `<operador,${code[position]}>`};
+        }
+        
+      }else{
+        return { end: position, token: `<operador,${code[position]}>`};
+      }
+      
+    }else{
+      return { end: position, token: `<operador,${code[position]}>`};
+    }
+
   // }
 };

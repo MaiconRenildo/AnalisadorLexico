@@ -27,6 +27,14 @@ describe("Operator Automaton", () => {
     expect(res.token).toEqual("<operador,/>");
   });
 
+  it("Deve receber '//  \n' e retornar o token e a posição final ", () => {
+    const res = operatorAutomaton('//  \n', 0);
+    expect(res).toHaveProperty("end");
+    expect(res).toHaveProperty("token");
+    expect(res.end).toEqual(4);
+    expect(res.token).toEqual(null);
+  });
+
   it("Deve receber '=+1' e retornar o token e a posição final ", () => {
     const res = operatorAutomaton("=+1", 1);
     expect(res).toHaveProperty("end");
