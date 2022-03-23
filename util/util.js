@@ -4,8 +4,14 @@ const isDigit = (character) => {
 };
 
 const isLetter = (character) => {
-  const reg = /[a-zA-Z]/;
-  return reg.test(character);
+
+  if(character=="_"){
+    return true;
+  }else{
+    const reg = /[a-zA-Z]/;
+    return reg.test(character);
+  }
+
 };
 
 const isString = (character) => {
@@ -25,6 +31,14 @@ const isPunctuation = (character) => {
   const punctuations = "();,.";
   return punctuations.indexOf(character) == -1 ? false : true;
 };
+
+const isStartKey = (character) => {
+  return character=="{" ? true :false;
+}
+
+const isEndKey = (character) => {
+  return character=="}" ? true :false;
+}
 
 const isParentheses = (character) => {
   return character === "(" || character === ")" ? true : false;
@@ -64,7 +78,9 @@ module.exports = {
   isSpace,
   isLetter,
   isString,
+  isEndKey,
   isOperator,
+  isStartKey,
   isSumOrSub,
   isAssigment,
   isComparison,

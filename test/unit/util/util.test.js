@@ -3,7 +3,9 @@ const {
   isSpace,
   isLetter,
   isString,
+  isEndKey,
   isOperator,
+  isStartKey,
   isSumOrSub,
   isAssigment,
   isComparison,
@@ -53,6 +55,12 @@ describe("util\n", () => {
   });
 
   describe("isLetter", () => {
+
+    it('Deve receber "_" e retornar true', () => {
+      const res = isLetter("_");
+      expect(res).toEqual(true);
+    });
+
     it('Deve receber "2" e retornar false', () => {
       const res = isLetter("2");
       expect(res).toEqual(false);
@@ -309,4 +317,22 @@ describe("util\n", () => {
       expect(res).toEqual(false);
     });
   });
+
+  describe("isStartKey",()=>{
+
+    it("Deve receber `{` e retornar true",()=>{
+      const res = isStartKey("{");
+      expect(res).toEqual(true)
+    });
+
+  });
+
+  describe("isEndKey",()=>{
+
+    it("Deve receber `{` e retornar true",()=>{
+      const res = isEndKey("}");
+      expect(res).toEqual(true)
+    });
+    
+  })
 });
