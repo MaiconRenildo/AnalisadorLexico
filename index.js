@@ -6,12 +6,14 @@ const {
   isSpace,
   isLetter,
   isString,
+  isStartKey,
   isOperator,
   isAssigment,
   isComparison,
   isPunctuation,
 } = require("./util/util");
 
+const { keyAutomaton } =require("./automatons/key");
 const { numberAutomaton } = require("./automatons/number");
 const { stringAutomaton } = require("./automatons/string");
 const { letterAutomaton } = require("./automatons/letter");
@@ -25,7 +27,9 @@ const lexicalAnalyzer = async () => {
   const tokens = [];
 
   const addtoken = (token) => {
-    tokens.push(token);
+    if(token){
+      tokens.push(token);
+    }
   };
 
   const print = () => {
@@ -81,7 +85,11 @@ const lexicalAnalyzer = async () => {
         addtoken(token);
         analyze(end + 1);
 
-      } else {
+      } else if(isStartKey(code[i])){
+        const { end } = keyAutomaton(code, i, reservedWords, ids);
+        analyze(end + 1);
+        
+      }  else {
         throw `Caracter inválido.Posição: ${code[i]}`;
       }
 
